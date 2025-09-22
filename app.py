@@ -7,7 +7,7 @@ from linebot.models import MessageEvent, TextMessage, TextSendMessage
 
 app = Flask(__name__)
 
-# 從環境變數讀取
+# 從環境變數讀取 Token 和 Secret
 CHANNEL_ACCESS_TOKEN = os.getenv("CHANNEL_ACCESS_TOKEN")
 CHANNEL_SECRET = os.getenv("CHANNEL_SECRET")
 
@@ -15,55 +15,69 @@ line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(CHANNEL_SECRET)
 
 # 載入產品資料
-with open("products.json", "r", encoding="utf-8") as f:
-    PRODUCTS = json.load(f)
-
-
-@app.route("/callback", methods=["POST"])
+PRODUCTS = {
+    "選單": {"成分": "這是測試產品", "介紹": "Bot 已經正常回應！"},
+    "hi": {"成分": "greeting", "介紹": "Hello! Bot is alive!"}
+}
+@app.route("/callback", methods=['POST'])
 def callback():
-    signature = request.headers["X-Line-Signature"]
+    signature = request.headers.get("X-Line-Signature", "")
     body = request.get_data(as_text=True)
+
+    print("Request body:", body)   # Debug log
 
     try:
         handler.handle(body, signature)
     except InvalidSignatureError:
+        print("❌ Invalid signature")
         abort(400)
 
     return "OK"
 
-
+# 處理文字訊息
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    text = event.message.text.strip()
+    user_message = event.message.text.strip()
+    print("使用者傳來的訊息:", user_message)  # Debug log
 
-    # 第一層選單
-    if text in ["選單", "menu"]:
-        reply = "請選擇：公司 | 產品 | 制度 | 願景 | 團隊"
-    elif text == "公司":
-        reply = "Three International 是一家專注健康產品的直銷公司。"
-    elif text == "制度":
-        reply = "公司制度包含會員制度、獎金制度與銷售獎勵。"
-    elif text == "願景":
-        reply = "願景：打造全球健康生活品牌。"
-    elif text == "團隊":
-        reply = "我們的團隊來自各國專業領域，專注健康與事業發展。"
+    reply = ""
 
-    # 第二層 - 產品清單
-    elif text == "產品":
-        reply = "請選擇產品名稱：\n" + " | ".join(PRODUCTS.keys())
+    # 如果輸入 "選單"
+    if user_message == "選單":
+        reply = "請輸入以下選項之一：\n公司 / 產品 / 制度 / 願景 / 團隊"
 
-    # 第三層 - 產品詳細介紹
-    elif text in PRODUCTS:
-        product = PRODUCTS[text]
-        reply = f"📦 {text}\n\n成分：{', '.join(product['成分'])}\n\n介紹：{product['介紹']}"
+    # 如果輸入 "公司"
+    elif user_message == "公司":
+        reply = "這是一家直銷公司，專注於健康產品。"
+
+    # 如果輸入 "制度"
+    elif user_message == "制度":
+        reply = "我們的制度採用會員推薦制，詳細內容可向上線確認。"
+
+    # 如果輸入 "產品"
+    elif user_message == "產品":
+        reply = "請輸入產品名稱，例如：維他命C、魚油"
+
+    # 查詢產品
+    elif user_message in PRODUCTS:
+        product = PRODUCTS[user_message]
+        reply = f"產品名稱: {user_message}\n成分: {product.get('成分', '無')}\n介紹: {product.get('介紹', '無')}"
+
+    # 願景
+    elif user_message == "願景":
+        reply = "我們的願景是成為全球領先的健康企業。"
+
+    # 團隊
+    elif user_message == "團隊":
+        reply = "我們的團隊由專業人士組成，專注於產品與會員的發展。"
 
     else:
-        reply = "請輸入『選單』查看功能。"
+        reply = "抱歉，我不太懂您的意思。請輸入『選單』來查看可用選項。"
 
     line_bot_api.reply_message(
-        event.reply_token, TextSendMessage(text=reply)
+        event.reply_token,
+        TextSendMessage(text=reply)
     )
 
-
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
+    app.run(host="0.0.0.0", port=5000)
