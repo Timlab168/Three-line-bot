@@ -1,0 +1,6 @@
+@echo off
+set /p msg=請輸入這次更新的說明: 
+git add .
+git commit -m "%msg%"
+git push origin main
+pause

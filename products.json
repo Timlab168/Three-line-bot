@@ -1,26 +1,68 @@
 {
-  "Revive": {
-    "成分": [
-      "薑黃素",
-      "乳香",
-      "黑孜然油",
-      "葡萄籽萃取物",
-      "香菇萃取物",
-      "沙棘果油",
-      "胡椒素",
-      "薄荷醇"
-    ],
-    "介紹": "幫助維持關節健康，緩解肌肉僵硬，支持運動恢復。"
+  "產品1": {
+    "description": "這是產品1的成分與介紹。",
+    "image": "https://example.com/product1.jpg",
+    "video": "https://youtube.com/watch?v=xxxx1",
+    "link": "https://example.com/product1"
   },
-  "Vitalité": {
-    "成分": [
-      "超級食物混合物",
-      "天然維生素和礦物質",
-      "消化酶混合物",
-      "益生菌",
-      "莓混合物",
-      "歐米茄-3 複合軟膠囊"
-    ],
-    "介紹": "提供全面營養，促進心臟、大腦和眼睛健康，保持腸道微生物群平衡。"
+  "產品2": {
+    "description": "這是產品2的成分與介紹。",
+    "image": "https://example.com/product2.jpg",
+    "video": "https://youtube.com/watch?v=xxxx2",
+    "link": "https://example.com/product2"
+  },
+  "產品3": {
+    "description": "這是產品3的成分與介紹。",
+    "image": "https://example.com/product3.jpg",
+    "video": "https://youtube.com/watch?v=xxxx3",
+    "link": "https://example.com/product3"
+  },
+  "產品4": {
+    "description": "這是產品4的成分與介紹。",
+    "image": "https://example.com/product4.jpg",
+    "video": "https://youtube.com/watch?v=xxxx4",
+    "link": "https://example.com/product4"
+  },
+  "產品5": {
+    "description": "這是產品5的成分與介紹。",
+    "image": "https://example.com/product5.jpg",
+    "video": "https://youtube.com/watch?v=xxxx5",
+    "link": "https://example.com/product5"
+  },
+  "產品6": {
+    "description": "這是產品6的成分與介紹。",
+    "image": "https://example.com/product6.jpg",
+    "video": "https://youtube.com/watch?v=xxxx6",
+    "link": "https://example.com/product6"
+  },
+  "產品7": {
+    "description": "這是產品7的成分與介紹。",
+    "image": "https://example.com/product7.jpg",
+    "video": "https://youtube.com/watch?v=xxxx7",
+    "link": "https://example.com/product7"
+  },
+  "產品8": {
+    "description": "這是產品8的成分與介紹。",
+    "image": "https://example.com/product8.jpg",
+    "video": "https://youtube.com/watch?v=xxxx8",
+    "link": "https://example.com/product8"
+  },
+  "產品9": {
+    "description": "這是產品9的成分與介紹。",
+    "image": "https://example.com/product9.jpg",
+    "video": "https://youtube.com/watch?v=xxxx9",
+    "link": "https://example.com/product9"
+  },
+  "產品10": {
+    "description": "這是產品10的成分與介紹。",
+    "image": "https://example.com/product10.jpg",
+    "video": "https://youtube.com/watch?v=xxxx10",
+    "link": "https://example.com/product10"
+  },
+  "產品11": {
+    "description": "這是產品11的成分與介紹。",
+    "image": "https://example.com/product11.jpg",
+    "video": "https://youtube.com/watch?v=xxxx11",
+    "link": "https://example.com/product11"
   }
 }
