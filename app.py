@@ -13,6 +13,7 @@ CHANNEL_SECRET = os.getenv("CHANNEL_SECRET")
 line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(CHANNEL_SECRET)
 
+# Line Webhook 的入口
 @app.route("/callback", methods=["POST"])
 def callback():
     signature = request.headers.get("X-Line-Signature", "")
@@ -37,4 +38,3 @@ def handle_message(event):
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
-🔧 接下來的步驟
