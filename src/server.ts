@@ -10,6 +10,14 @@ const config = {
 };
 const client = new Client(config as any);
 const app = express();
+app.get('/health', (_req, res) => {
+  res.status(200).send('OK');
+});
+
+// 也可以順便加個首頁測試
+app.get('/', (_req, res) => {
+  res.status(200).send('OK');
+});
 app.use(morgan('tiny'));
 app.get('/', (_, res) => res.type('text').send('THREE bot up'));
 app.use('/public', express.static('public'));
@@ -42,4 +50,6 @@ function matchProduct(input: string): ProductId | undefined {
   return undefined;
 }
 const PORT = Number(process.env.PORT || 3000);
+app.get('/health', (_req, res) => res.status(200).send('OK'));
+app.get('/', (_req, res) => res.status(200).send('OK'));
 app.listen(PORT, () => console.log(`Listening on :${PORT}`));
